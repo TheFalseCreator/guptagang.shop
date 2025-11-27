@@ -149,30 +149,29 @@ body {
     padding: 24px 12px 8px;
   }
 }
-/* ---------- Classic Quote Section ---------- */
-.classic-quote-box {
-  background: rgba(165, 124, 84, 0.20);   /* light brown, 20% opacity */
-  border: 1px solid rgba(165, 124, 84, 0.35);
-  padding: 28px 20px;
-  margin: 40px 0 40px;
-  border-radius: 6px;
+/* --- Poem card matching "We love Pragyaan" --- */
+.quote-card {
+  background-color: #ffffff;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  padding: 32px 16px;
+  margin: 32px 0;
+  text-align: center;
 }
 
-.classic-quote-text {
+.quote-card-text {
   font-family: "Playfair Display", serif;
-  font-size: 20px;
-  line-height: 1.55;
-  color: #3b2e1d; /* deep brown text */
-  text-align: left;
-  white-space: pre-line;
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
 }
 
-.classic-quote-footer {
+.quote-card-credit {
   margin-top: 16px;
-  font-size: 12px;
-  letter-spacing: 0.05em;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6a5845;
-  text-align: right;
+  color: #999;
 }
+
 
