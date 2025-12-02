@@ -3,256 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPSFLIX – Final Season Merch</title>
+  <title>The SPS Collection | guptagang</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Fonts (Lato + Playfair like your design) -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page-wrap">
-    <!-- Top nav -->
-    <header class="nav">
-      <div class="nav-left">
-        <span class="brand">SPS<span>FLIX</span></span>
-        <span class="nav-tagline">Final Season · Class of 2026</span>
-      </div>
-      <nav class="nav-links">
-        <button class="nav-link active">Home</button>
-        <button class="nav-link">Catalog</button>
-        <button class="nav-link">About</button>
-      </nav>
-      <div class="nav-right">
-        <span class="nav-pill">Now streaming: hoodies only</span>
-      </div>
+  <div class="page">
+    <!-- Header -->
+    <header class="header">
+      <div class="tag">BY GUPTAGANG</div>
+
+      <h1 class="title">
+        <span>The SPS</span><br />
+        <span>Collection</span>
+      </h1>
+
+      <p class="subtitle">
+        Curated memories from the Class of 2025–26. A minimalist tribute to the
+        moments that define us.
+      </p>
     </header>
 
-    <!-- Hero -->
-    <main>
-      <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="hero-kicker">MEMORIES OF SPS · FINAL SEASON</p>
-          <h1 class="hero-title">
-            The One Where<br />
-            We Graduate
-          </h1>
-          <p class="hero-subtitle">
-            Season: 20 · Episode: 26 &mdash; official graduation merch drop.
-            Limited run. Maximum nostalgia.
-          </p>
-          <div class="hero-actions">
-            <button id="shop-hoodies-btn" class="btn btn-primary">
-              Shop Hoodies
-            </button>
-            <button class="btn btn-ghost">
-              View Trailer (Lookbook)
-            </button>
-          </div>
-          <p class="hero-meta">
-            Endings are new beginnings. Collect the last episode merch before
-            the credits roll.
-          </p>
-        </div>
-      </section>
+    <!-- Quote card -->
+    <section class="quote-card">
+      <p>“We love Pragyaan”</p>
+    </section>
+    
+<section class="quote-card">
+  <p class="quote-card-text">
+    And yet again<br>
+    This morning<br>
+    There was no one<br>
+    Standing next to<br>
+    My bed<br>
+    Saying your<br>
+    Royal Highness<br>
+    Here is your<br>
+    Coffee.<br><br>
+    Ridiculous.
+  </p>
 
-      <!-- Marquee / glow text -->
-      <section class="marquee">
-        <div class="marquee-track">
-          <span>Memories of SPS</span>
-          <span>Class of 2026</span>
-          <span>Last Episode Merch</span>
-          <span>Memories of SPS</span>
-          <span>Class of 2026</span>
-          <span>Last Episode Merch</span>
-        </div>
-      </section>
+  <p class="quote-card-credit">
+    — Quoted by Sonia Ma’am · Requested by JoJo
+  </p>
+</section>
 
-      <!-- Catalog -->
-      <section id="catalog" class="catalog">
-        <div class="section-header">
-          <div>
-            <p class="section-kicker">MERCH ROW · HOODIES</p>
-            <h2 class="section-title">Now Playing in Your Wardrobe</h2>
-            <p class="section-subtitle">
-              Choose your episode. Each design is a memory from the SPS shared
-              universe.
-            </p>
-          </div>
-          <div class="section-meta">
-            <span class="section-pill">Drop 01 · Limited Seats</span>
-          </div>
-        </div>
 
-        <!-- Netflix-style row -->
-        <div class="product-row-wrapper">
-          <h3 class="row-title">Featured Hoodies</h3>
-          <div id="product-row" class="product-row">
-            <!-- Cards injected by script.js -->
-          </div>
-        </div>
-      </section>
+</section>
+
+    <!-- Sticker grid -->
+    <main class="stickers-section">
+      <div id="stickers-container" class="stickers-grid">
+        <!-- Cards will be injected here by script.js -->
+      </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>© 2025 SPS · Class of 2026 · Final Season Merch</p>
-      <p>
-        Concept UI · “Series: Memories of SPS · The One Where We Graduate”
-      </p>
+      &copy; 2025 guptagang. All rights reserved.
     </footer>
   </div>
-
-  <!-- Order Modal -->
-  <div id="order-modal-overlay" class="modal-overlay hidden">
-    <div class="modal">
-      <button type="button" class="modal-close" id="order-modal-close">
-        &times;
-      </button>
-      <h2 class="modal-title">Place Your Order</h2>
-      <p class="modal-subtitle">
-        Fill in your details to book your hoodie for the finale.
-      </p>
-
-      <form id="order-form" novalidate>
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="fullName">Full Name *</label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              required
-              autocomplete="name"
-              placeholder="e.g. Yash Gupta"
-            />
-          </div>
-
-          <div class="form-field">
-            <label for="phone">Phone Number *</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              placeholder="10-digit number"
-            />
-          </div>
-
-          <div class="form-field">
-            <label for="admission">Admission Number *</label>
-            <input
-              type="text"
-              id="admission"
-              name="admission"
-              required
-              placeholder="School admission number"
-            />
-          </div>
-
-          <div class="form-field">
-            <label for="classSection">Class / Section *</label>
-            <input
-              type="text"
-              id="classSection"
-              name="classSection"
-              required
-              placeholder="e.g. XII A"
-            />
-          </div>
-
-          <div class="form-field">
-            <label for="product">Product *</label>
-            <input
-              type="text"
-              id="product"
-              name="product"
-              required
-              readonly
-            />
-          </div>
-
-          <div class="form-field">
-            <label for="size">Size *</label>
-            <select id="size" name="size" required>
-              <option value="">Select size</option>
-              <option value="XS">XS</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label for="quantity">Quantity *</label>
-            <input
-              type="number"
-              id="quantity"
-              name="quantity"
-              required
-              min="1"
-              max="5"
-              value="1"
-            />
-          </div>
-
-          <div class="form-field">
-            <label for="colour">Colour</label>
-            <select id="colour" name="colour">
-              <option value="">Default</option>
-              <option value="Black">Black</option>
-              <option value="Maroon">Maroon</option>
-              <option value="Charcoal">Charcoal</option>
-              <option value="Cream">Cream</option>
-            </select>
-          </div>
-
-          <div class="form-field form-field-full">
-            <label for="notes">Notes (optional)</label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="3"
-              placeholder="Any special request or fit preference?"
-            ></textarea>
-          </div>
-
-          <!-- Honeypot (anti-bot) -->
-          <div class="form-field honeypot">
-            <label for="website">Website</label>
-            <input
-              type="text"
-              id="website"
-              name="website"
-              autocomplete="off"
-            />
-          </div>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="btn btn-ghost" id="order-cancel-btn">
-            Cancel
-          </button>
-          <button type="submit" class="btn btn-primary" id="order-submit-btn">
-            Submit Order
-          </button>
-        </div>
-
-        <p id="order-message" class="order-message"></p>
-      </form>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="toast hidden"></div>
 
   <!-- Script -->
   <script src="script.js"></script>
