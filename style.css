@@ -1,177 +1,387 @@
-/* ---------- Global reset ---------- */
+/* ========= RESET ========= */
+
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-/* ---------- Layout ---------- */
+html,
 body {
-  background-color: #f6f6f6;
-  font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #222;
+  margin: 0;
+  padding: 0;
 }
 
-.page {
-  max-width: 420px;   /* mobile-first like your screenshots */
-  margin: 0 auto;
-  padding: 32px 16px 48px;
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #300000 0, #050505 45%, #000 100%);
+  color: #f5f5f5;
 }
 
-/* ---------- Header ---------- */
-.header {
-  text-align: center;
-  margin-bottom: 32px;
+/* ========= LAYOUT ========= */
+
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.tag {
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 999px;
-  border: 1px solid #e3e3e3;
-  font-size: 10px;
+main {
+  flex: 1;
+}
+
+/* ========= NAV ========= */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 6vw;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+  backdrop-filter: blur(12px);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.3rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #777;
-  background-color: #fff;
-  margin-bottom: 28px;
+  color: #e50914;
 }
 
-.title {
+.brand span {
+  color: #f5f5f5;
+}
+
+.nav-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-tagline {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #cccccc;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-link {
+  border: none;
+  background: transparent;
+  color: #bbbbbb;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.nav-link.active {
+  color: #ffffff;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-pill {
+  border-radius: 999px;
+  padding: 6px 14px;
+  border: 1px solid rgba(229, 9, 20, 0.6);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffcccc;
+  background: linear-gradient(
+    90deg,
+    rgba(229, 9, 20, 0.2),
+    rgba(229, 9, 20, 0.05)
+  );
+}
+
+/* ========= HERO ========= */
+
+.hero {
+  position: relative;
+  height: min(70vh, 520px);
+  padding: 6vw;
+  display: flex;
+  align-items: flex-end;
+  color: #ffffff;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.88),
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.95)
+    ),
+    url("https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg");
+  /* Replace with your own background */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0, #000 80%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 580px;
+  z-index: 1;
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.75rem;
+  color: #ffb3b3;
+  margin-bottom: 10px;
+}
+
+.hero-title {
   font-family: "Playfair Display", serif;
-  font-size: 42px;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.hero-subtitle {
+  font-size: 0.92rem;
+  color: #e0dedf;
+  max-width: 30rem;
   margin-bottom: 18px;
 }
 
-.subtitle {
-  font-size: 15px;
-  color: #7d7d7d;
-  line-height: 1.5;
-}
-
-/* ---------- Quote card ---------- */
-.quote-card {
-  background-color: #ffffff;
-  border-radius: 4px;
-  border: 1px solid #efefef;
-  padding: 32px 16px;
-  margin: 40px 0 32px;
-  text-align: center;
-  font-family: "Playfair Display", serif;
-  font-size: 18px;
-  color: #555;
-}
-
-/* ---------- Sticker grid ---------- */
-.stickers-section {
-  margin-bottom: 40px;
-}
-
-.stickers-grid {
+.hero-actions {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
-/* ---------- Sticker card ---------- */
-.sticker-card {
-  background-color: #ffffff;
-  border-radius: 4px;
-  padding: 20px 0 8px;
+.hero-meta {
+  font-size: 0.8rem;
+  color: #bfbfbf;
 }
 
-.sticker-image-wrapper {
-  background-color: #f8f8f8;
-  border-radius: 4px;
-  padding: 32px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* ========= BUTTONS ========= */
 
-.sticker-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* text below image */
-.sticker-meta {
-  padding: 20px 4px 0;
-}
-
-.sticker-category {
-  font-size: 11px;
+.btn {
+  border-radius: 999px;
+  padding: 9px 18px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a0a0a0;
-  margin-bottom: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease, color 0.15s ease;
 }
 
-.sticker-title {
-  font-family: "Playfair Display", serif;
-  font-size: 22px;
-  margin-bottom: 6px;
+.btn-primary {
+  background: #e50914;
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(229, 9, 20, 0.5);
 }
 
-.sticker-description {
-  font-size: 14px;
-  color: #6f6f6f;
-  line-height: 1.4;
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(229, 9, 20, 0.7);
 }
 
-/* ---------- Footer ---------- */
-.footer {
-  margin-top: 48px;
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 0.18em;
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.04);
+  color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ========= MARQUEE ========= */
+
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: radial-gradient(circle at center, #2b0000, #050000);
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 40px;
+  padding: 8px 0;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+}
+
+.marquee span {
   text-transform: uppercase;
-  color: #b0b0b0;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  color: #ffb3b3;
 }
 
-/* ---------- Desktop tweaks ---------- */
-@media (min-width: 768px) {
-  .page {
-    max-width: 960px;
-    padding: 40px 32px 64px;
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
   }
-
-  .stickers-grid {
-    gap: 48px;
-  }
-
-  .sticker-card {
-    padding: 24px 12px 8px;
+  to {
+    transform: translateX(-50%);
   }
 }
-/* --- Poem card matching "We love Pragyaan" --- */
-.quote-card {
-  background-color: #ffffff;
-  border: 1px solid #efefef;
-  border-radius: 4px;
-  padding: 32px 16px;
-  margin: 32px 0;
-  text-align: center;
+
+/* ========= CATALOG ========= */
+
+.catalog {
+  padding: 26px 6vw 40px;
 }
 
-.quote-card-text {
-  font-family: "Playfair Display", serif;
-  font-size: 18px;
-  color: #555;
-  line-height: 1.6;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 20px;
 }
 
-.quote-card-credit {
-  margin-top: 16px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+.section-kicker {
+  font-size: 0.7rem;
   text-transform: uppercase;
-  color: #999;
+  letter-spacing: 0.22em;
+  color: #ffb3b3;
 }
 
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  margin: 4px 0;
+}
 
+.section-subtitle {
+  font-size: 0.88rem;
+  color: #d5d3d4;
+  max-width: 500px;
+}
+
+.section-meta {
+  display: flex;
+}
+
+.section-pill {
+  align-self: flex-start;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f7f7f7;
+}
+
+/* ========= PRODUCT ROW ========= */
+
+.product-row-wrapper {
+  margin-top: 18px;
+}
+
+.row-title {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.product-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+}
+
+.product-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.product-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-row::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+/* Card */
+
+.product-card {
+  flex: 0 0 230px;
+  background: radial-gradient(circle at top left, #330000, #070707 60%);
+  border-radius: 18px;
+  padding: 10px 10px 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border 0.2s ease, background 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.9);
+  border-color: rgba(229, 9, 20, 0.7);
+  background: radial-gradient(circle at top left, #4a0000, #050505 70%);
+}
+
+.product-image-wrapper {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.product-image {
+  width: 100%;
+  display: block;
+  height: 150px;
+  object-fit: cover;
+  filter: saturate(1.05);
+  transform: scale(1.02);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.06);
+  filter: saturate(1.2) brightness(1.05);
+}
+
+.product-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(229, 9, 20, 0
