@@ -2,73 +2,228 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The SPS Collection | guptagang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GUPTAGANG × SPS 2025-26</title>
 
-  <!-- Fonts (Lato + Playfair like your design) -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Archivo+Black&family=Righteous&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page">
-    <!-- Header -->
-    <header class="header">
-      <div class="tag">BY GUPTAGANG</div>
+  <nav>
+    <div class="logo">GUPTAGANG</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Hoodies</a></li>
+      <li><a href="#sizes">Sizes</a></li>
+      <li><a href="#stickers">Gallery</a></li>
+    </ul>
+    <button class="nav-cta" onclick="scrollToProducts()">Order Now</button>
+  </nav>
 
-      <h1 class="title">
-        <span>The SPS</span><br />
-        <span>Collection</span>
-      </h1>
+  <section class="hero" id="home">
+    <div class="hero-tag">GUPTAGANG PRESENTS</div>
+    <h1 class="hero-title">
+      <span class="line1 glitch" data-text="THE SPS">THE SPS</span>
+      <span class="line2">COLLECTION</span>
+    </h1>
+    <div class="hero-subtitle">CLASS OF 2025-26</div>
+    <p class="hero-description">
+      Curated memories from the Class of 2025-26. Premium hoodies designed for those who survived it all. 
+      Limited edition. Bold designs. Unstoppable spirit.
+    </p>
+    <button class="hero-cta" onclick="scrollToProducts()">Explore Collection</button>
+  </section>
 
-      <p class="subtitle">
-        Curated memories from the Class of 2025–26. A minimalist tribute to the
-        moments that define us.
-      </p>
-    </header>
+  <section class="products-section" id="products">
+    <div class="section-header">
+      <div class="section-tag">PREMIUM MERCHANDISE</div>
+      <h2 class="section-title">THE HOODIES</h2>
+    </div>
 
-    <!-- Quote card -->
-    <section class="quote-card">
-      <p>“We love Pragyaan”</p>
-    </section>
-    
-<section class="quote-card">
-  <p class="quote-card-text">
-    And yet again<br>
-    This morning<br>
-    There was no one<br>
-    Standing next to<br>
-    My bed<br>
-    Saying your<br>
-    Royal Highness<br>
-    Here is your<br>
-    Coffee.<br><br>
-    Ridiculous.
-  </p>
-
-  <p class="quote-card-credit">
-    — Quoted by Sonia Ma’am · Requested by JoJo
-  </p>
-</section>
-
-
-</section>
-
-    <!-- Sticker grid -->
-    <main class="stickers-section">
-      <div id="stickers-container" class="stickers-grid">
-        <!-- Cards will be injected here by script.js -->
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <div style="font-size: 8rem;">👕</div>
+          <div class="product-badge">LIMITED EDITION</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Seniors Survivors</h3>
+          <p class="product-description">
+            Premium black hoodie featuring the iconic "seniors SURVIVORS" design with skeleton character. 
+            "MADE IN 2008" edition with bold 2026 on sleeve. Represents the journey of resilience.
+          </p>
+          <div class="product-price">₹1,800</div>
+          <button class="product-btn" onclick="openOrderModal('Seniors Survivors Hoodie')">Order Now</button>
+        </div>
       </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      &copy; 2025 guptagang. All rights reserved.
-    </footer>
+      <div class="product-card">
+        <div class="product-image">
+          <div style="font-size: 8rem;">🎬</div>
+          <div class="product-badge">EXCLUSIVE</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Class of 2026</h3>
+          <p class="product-description">
+            Back design featuring "CLASS OF 2026 - THE ONE WHERE WE GRADUATE" with creative movie-style elements, 
+            music player interface, and "MEMORIES OF SPS SIDDHANT". Episodes spanning 2012-2026.
+          </p>
+          <div class="product-price">₹1,800</div>
+          <button class="product-btn" onclick="openOrderModal('Class of 2026 Special Edition')">Order Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="size-chart-section" id="sizes">
+    <div class="size-chart-container">
+      <h2 class="size-chart-title">Size Chart</h2>
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Chest (inches)</th>
+            <th>Length (inches)</th>
+            <th>Sleeve (inches)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>S</strong></td><td>38</td><td>26</td><td>23</td></tr>
+          <tr><td><strong>M</strong></td><td>40</td><td>27</td><td>24</td></tr>
+          <tr><td><strong>L</strong></td><td>42</td><td>28</td><td>25</td></tr>
+          <tr><td><strong>XL</strong></td><td>44</td><td>29</td><td>26</td></tr>
+          <tr><td><strong>XXL</strong></td><td>46</td><td>30</td><td>27</td></tr>
+        </tbody>
+      </table>
+      <div class="size-note">
+        <p><strong>Note:</strong> All measurements are approximate and may vary by ±1 inch.</p>
+        <p>For best fit, measure your favorite hoodie and compare with the chart above.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stickers-section" id="stickers">
+    <div class="section-header">
+      <div class="section-tag">DESIGNED BY GUPTAGANG</div>
+      <h2 class="section-title">Our Creations</h2>
+    </div>
+
+    <div class="stickers-grid">
+      <div class="sticker-card">
+        <div class="sticker-image"><div style="font-size: 5rem;">🎫</div></div>
+        <h3 class="sticker-name">Survivors Club</h3>
+        <p class="sticker-category">Membership</p>
+      </div>
+
+      <div class="sticker-card">
+        <div class="sticker-image"><div style="font-size: 5rem;">🎨</div></div>
+        <h3 class="sticker-name">Never Underestimate</h3>
+        <p class="sticker-category">Graffiti</p>
+      </div>
+
+      <div class="sticker-card">
+        <div class="sticker-image"><div style="font-size: 5rem;">💀</div></div>
+        <h3 class="sticker-name">Term 1 Trauma</h3>
+        <p class="sticker-category">Academic</p>
+      </div>
+
+      <div class="sticker-card">
+        <div class="sticker-image"><div style="font-size: 5rem;">📺</div></div>
+        <h3 class="sticker-name">The Seniors</h3>
+        <p class="sticker-category">Lifestyle</p>
+      </div>
+
+      <div class="sticker-card">
+        <div class="sticker-image"><div style="font-size: 5rem;">🧠</div></div>
+        <h3 class="sticker-name">Akshay Sir's Quote</h3>
+        <p class="sticker-category">Wisdom</p>
+      </div>
+
+      <div class="sticker-card">
+        <div class="sticker-image"><div style="font-size: 5rem;">📚</div></div>
+        <h3 class="sticker-name">Studying Since Day 1</h3>
+        <p class="sticker-category">Academic</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">GUPTAGANG</div>
+      <p class="footer-text">
+        The SPS Collection • Class of 2025-26<br>
+        Curated memories. Bold designs. Unstoppable spirit.
+      </p>
+      <div class="footer-credits">&copy; 2025 GUPTAGANG. ALL RIGHTS RESERVED.</div>
+    </div>
+  </footer>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-btn" onclick="closeOrderModal()">&times;</span>
+        <h2>Place Order</h2>
+        <p>Fill in your details to complete the order</p>
+      </div>
+      <div class="modal-body">
+        <form id="orderForm">
+          <div class="form-group">
+            <label for="productName">Product</label>
+            <input type="text" id="productName" name="productName" readonly>
+          </div>
+          <div class="form-group">
+            <label for="size">Select Size *</label>
+            <select id="size" name="size" required>
+              <option value="">Choose your size</option>
+              <option value="S">Small (S)</option>
+              <option value="M">Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label for="admissionNumber">Admission Number *</label>
+            <input type="text" id="admissionNumber" name="admissionNumber" required placeholder="Enter admission number">
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number *</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+          </div>
+          <div class="form-group">
+            <label for="class">Class/Year *</label>
+            <select id="class" name="class" required>
+              <option value="">Select your class</option>
+              <option value="B.Tech 1st Year">B.Tech 1st Year</option>
+              <option value="B.Tech 2nd Year">B.Tech 2nd Year</option>
+              <option value="B.Tech 3rd Year">B.Tech 3rd Year</option>
+              <option value="B.Tech 4th Year">B.Tech 4th Year</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">Confirm Order</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">✅</div>
+          <h3>Order Placed!</h3>
+          <p>We'll contact you shortly on your phone number.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Script -->
+  <!-- Main JS -->
   <script src="script.js"></script>
 </body>
 </html>
