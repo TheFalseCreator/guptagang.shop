@@ -1,5 +1,5 @@
 // ---- Set this to your Apps Script Web App URL ----
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // <-- replace
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ_GR310jAtdCVSOUeVu9DQgrYQUV0T_Oy92ojctZzm-1U3Le4LK7v8lCFrlF7gRLLyg/exec'; // <-- replace
 
 /* helpers */
 const popup = () => document.getElementById('quickOrderPopup');
