@@ -1,5 +1,6 @@
-// ---- Set this to your Apps Script Web App URL ----
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ_GR310jAtdCVSOUeVu9DQgrYQUV0T_Oy92ojctZzm-1U3Le4LK7v8lCFrlF7gRLLyg/exec'; // <-- replace
+// script.js - drop into your repo (replace old file)
+// Put your deployed web app URL here:
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ_GR310jAtdCVSOUeVu9DQgrYQUV0T_Oy92ojctZzm-1U3Le4LK7v8lCFrlF7gRLLyg/exec'; // <-- replace this
 
 /* helpers */
 const popup = () => document.getElementById('quickOrderPopup');
@@ -11,7 +12,6 @@ const closeAfterBtn = () => document.getElementById('quickCloseAfter');
 
 function scrollToProduct(){ const el = document.getElementById('product'); if(el) el.scrollIntoView({behavior:'smooth'}); }
 
-/* open popup and set product */
 function openQuickOrder(productName=''){
   const p = popup(); if(!p) return;
   p.classList.add('open'); p.setAttribute('aria-hidden','false');
@@ -21,14 +21,12 @@ function openQuickOrder(productName=''){
   document.body.style.overflow = 'hidden';
 }
 
-/* close popup */
 function closeQuickOrder(){
   const p = popup(); if(!p) return;
   p.classList.remove('open'); p.setAttribute('aria-hidden','true');
   document.body.style.overflow = 'auto';
 }
 
-/* wire product order button */
 function wireProductButtons(){
   document.querySelectorAll('.product-btn').forEach(btn => {
     btn.removeEventListener('click', onProductClick);
@@ -40,10 +38,8 @@ function onProductClick(e){
   openQuickOrder(product);
 }
 
-/* phone validator */
 function validPhone(phone){ const d = (phone||'').replace(/\D/g,''); return /^\d{10}$/.test(d); }
 
-/* submit handler */
 async function handleSubmit(e){
   e.preventDefault();
   const submitBtn = document.getElementById('quickSubmit');
@@ -73,38 +69,59 @@ async function handleSubmit(e){
   if(Date.now()-last < 7000){ alert('Please wait a moment before another order.'); if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; } return; }
   localStorage.setItem('lastQuickOrderAt', Date.now());
 
-  try{
-    // If Apps Script supports CORS, remove mode:'no-cors' to read response
-    await fetch(GOOGLE_SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  // Developer safety checks
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('YOUR_DEPLOYMENT_ID')) {
+    alert('Set GOOGLE_SCRIPT_URL in script.js to your deployed Apps Script web app URL (step 2).');
+    if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; }
+    return;
+  }
 
-    const f = form(); if(f) f.hidden = true;
-    const s = successBox(); if(s) s.hidden = false;
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
 
-    setTimeout(()=>{ if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; } }, 800);
-    setTimeout(closeQuickOrder, 1400);
+    if (!res.ok) {
+      throw new Error('Server responded with status ' + res.status);
+    }
 
-  }catch(err){
+    // parse JSON from server
+    const data = await res.json();
+    if (data && data.status === 'ok') {
+      const f = form(); if(f) f.hidden = true;
+      const s = successBox(); if(s) s.hidden = false;
+      setTimeout(() => {
+        if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; }
+      }, 800);
+      setTimeout(closeQuickOrder, 1400);
+    } else {
+      throw new Error(data && data.message ? data.message : 'Server rejected request');
+    }
+
+  } catch (err) {
     console.error('Order error', err);
-    alert('Could not place order now. Try again later.');
+    alert('Could not place order now. See console for details.');
     if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; }
   }
 }
 
-/* on DOM ready */
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
   wireProductButtons();
   const f = form(); if(f) f.addEventListener('submit', handleSubmit);
-
   if(closeBtn()) closeBtn().addEventListener('click', closeQuickOrder);
   if(cancelBtn()) cancelBtn().addEventListener('click', closeQuickOrder);
   if(closeAfterBtn()) closeAfterBtn().addEventListener('click', closeQuickOrder);
 
-  // nav anchors
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click',(ev)=>{ ev.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if(t) t.scrollIntoView({behavior:'smooth'}); });
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 
-  // nav CTA opens popup for the single hoodie
   const navCta = document.querySelector('.nav-cta');
-  if(navCta) navCta.addEventListener('click', ()=> openQuickOrder('SPS Front & Back Hoodie — ₹1,600'));
+  if (navCta) navCta.addEventListener('click', () => openQuickOrder('SPS Front & Back Hoodie — ₹1,600'));
 });
