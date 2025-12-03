@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GUPTAGANG × SPS 2025-26 — Monochrome</title>
 
-  <!-- Fonts: creative but monochrome-friendly -->
+  <!-- Fonts: Bebas Neue (headings) + Cormorant Garamond (hero) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,600&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -68,7 +67,7 @@
             </p>
             <div class="product-footer">
               <div class="product-price">₹1,800</div>
-              <button class="product-btn" onclick="openQuickOrder('Seniors Survivors Hoodie')">Order</button>
+              <button class="product-btn" data-product="Seniors Survivors Hoodie">Order</button>
             </div>
           </div>
         </article>
@@ -85,7 +84,7 @@
             </p>
             <div class="product-footer">
               <div class="product-price">₹1,800</div>
-              <button class="product-btn" onclick="openQuickOrder('Class of 2026 Special Edition')">Order</button>
+              <button class="product-btn" data-product="Class of 2026 Special Edition">Order</button>
             </div>
           </div>
         </article>
@@ -140,34 +139,35 @@
   <!-- Compact Quick Order Popup -->
   <div id="quickOrderPopup" class="quick-popup" aria-hidden="true">
     <div class="quick-popup-inner" role="dialog" aria-modal="true" aria-labelledby="quickOrderTitle">
-      <button class="quick-close" aria-label="Close popup" onclick="closeQuickOrder()">✕</button>
+      <button class="quick-close" aria-label="Close popup" id="quickCloseBtn">✕</button>
       <h3 id="quickOrderTitle">Quick Order</h3>
       <p class="muted small">Tell us who you are — we'll reach out to confirm.</p>
 
-      <form id="quickOrderForm" class="quick-form">
+      <form id="quickOrderForm" class="quick-form" autocomplete="off" novalidate>
         <input type="hidden" id="quickProduct" name="product">
+
         <label class="field">
           <span class="label">Full name</span>
-          <input type="text" id="qName" name="name" required placeholder="Your full name">
+          <input type="text" id="qName" name="name" required placeholder="Your full name" />
         </label>
 
         <label class="field">
           <span class="label">Class / Year</span>
-          <input type="text" id="qClass" name="class" required placeholder="e.g., B.Tech 2nd Year">
+          <input type="text" id="qClass" name="class" required placeholder="e.g., B.Tech 2nd Year" />
         </label>
 
         <label class="field">
           <span class="label">Admission No.</span>
-          <input type="text" id="qAdmission" name="admission" required placeholder="Admission number">
+          <input type="text" id="qAdmission" name="admission" required placeholder="Admission number" />
         </label>
 
         <label class="field">
           <span class="label">Phone (10 digits)</span>
-          <input type="tel" id="qPhone" name="phone" required pattern="[0-9]{10}" placeholder="9876543210">
+          <input type="tel" id="qPhone" name="phone" required pattern="[0-9]{10}" placeholder="9876543210" />
         </label>
 
         <div class="quick-actions">
-          <button type="button" class="btn ghost" onclick="closeQuickOrder()">Cancel</button>
+          <button type="button" class="btn ghost" id="quickCancel">Cancel</button>
           <button type="submit" class="btn primary" id="quickSubmit">Place Order</button>
         </div>
       </form>
@@ -175,12 +175,11 @@
       <div id="quickSuccess" class="quick-success" hidden>
         <div class="check">✓</div>
         <p>Thanks! Order received. We'll contact you soon.</p>
-        <button class="btn" onclick="closeQuickOrder()">Close</button>
+        <button class="btn" id="quickCloseAfter">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- JS -->
   <script src="script.js" defer></script>
 </body>
 </html>
