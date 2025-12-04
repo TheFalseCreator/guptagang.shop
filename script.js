@@ -1,6 +1,6 @@
 // script.js - drop into your repo (replace old file)
 // Put your deployed web app URL here:
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ_GR310jAtdCVSOUeVu9DQgrYQUV0T_Oy92ojctZzm-1U3Le4LK7v8lCFrlF7gRLLyg/exec'; // <-- your web app URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwO7JJlrkn3vHS9FxFgvGsEw7WUGmBYFemPeBTWu_-dN9OzaZcTY6cGVPQTcUi6Xs2svA/exec'; // <-- your web app URL
 
 /* helpers */
 const popup = () => document.getElementById('quickOrderPopup');
