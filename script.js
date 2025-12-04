@@ -1,5 +1,5 @@
 // script.js — JSONP client (replace the entire file in your repo)
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0KOy1wwncfLCQe9wcD0qtH0ULWpMTlQDXjogj4H5U-fkgp_KYr2VTQu0IP9-fqStMkA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZY4Emg-pM4jYiwx3uFtpzmxTknHJ8qOXy9bxhEDj-2z0UoFkDkLz68vDJHChAQho0/exec';
 
 /* helpers */
 const popup = () => document.getElementById('quickOrderPopup');
