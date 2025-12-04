@@ -1,4 +1,4 @@
-// script.js — JSONP client (replace the entire file in your repo)
+// script.js - hidden-form submission (with JSONP fallback)
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZY4Emg-pM4jYiwx3uFtpzmxTknHJ8qOXy9bxhEDj-2z0UoFkDkLz68vDJHChAQho0/exec';
 
 /* helpers */
@@ -16,7 +16,57 @@ function wireProductButtons(){ document.querySelectorAll('.product-btn').forEach
 function onProductClick(e){ const product = e.currentTarget.dataset.product || ''; openQuickOrder(product); }
 function validPhone(phone){ const d = (phone||'').replace(/\D/g,''); return /^\d{10}$/.test(d); }
 
-/* JSONP helper */
+/* Hidden form submit helper (preferred) */
+function submitViaHiddenForm(payload, onDone) {
+  const hfProduct = document.getElementById('hf_product');
+  const hfName = document.getElementById('hf_name');
+  const hfClass = document.getElementById('hf_class');
+  const hfAdmission = document.getElementById('hf_admission');
+  const hfPhone = document.getElementById('hf_phone');
+  const hiddenForm = document.getElementById('hiddenOrderForm');
+  const iframe = document.getElementById('hidden_iframe');
+
+  // if hidden form or iframe missing, fallback to JSONP
+  if (!hiddenForm || !iframe || !hfProduct || !hfName) {
+    onDone(false, 'hidden_form_missing');
+    return;
+  }
+
+  hfProduct.value = payload.product || '';
+  hfName.value = payload.name || '';
+  hfClass.value = payload.class || '';
+  hfAdmission.value = payload.admission || '';
+  hfPhone.value = payload.phone || '';
+
+  let finished = false;
+  const finish = (ok, info) => {
+    if (finished) return;
+    finished = true;
+    try { iframe.removeEventListener('load', onLoad); } catch(e){}
+    clearTimeout(timeoutId);
+    onDone(ok, info);
+  };
+
+  function onLoad(){
+    // iframe loaded => server responded; treat as success
+    finish(true, 'loaded');
+  }
+
+  iframe.addEventListener('load', onLoad);
+
+  const timeoutId = setTimeout(()=> {
+    finish(false, 'timeout');
+  }, 10000); // 10s
+
+  // Submit the hidden form (navigates the iframe)
+  try {
+    hiddenForm.submit();
+  } catch(e) {
+    finish(false, 'submit_error');
+  }
+}
+
+/* JSONP fallback (keeps previous behavior if hidden form unavailable) */
 function submitViaJSONP(payload, cb) {
   const cbName = '__gup_order_cb_' + Date.now() + '_' + Math.floor(Math.random()*10000);
   window[cbName] = function(data) {
@@ -43,6 +93,22 @@ function submitViaJSONP(payload, cb) {
   script.id = cbName;
   script.onerror = function(){ try{ delete window[cbName]; } catch(e){} script.remove(); cb(new Error('JSONP load error')); };
   document.body.appendChild(script);
+}
+
+/* Unified submit that prefers hidden form, else JSONP */
+function submitOrder(payload, callback) {
+  // prefer hidden form (no CORS)
+  submitViaHiddenForm(payload, function(success, info){
+    if (success) {
+      callback(null, {status:'ok', method:'hiddenForm'});
+      return;
+    }
+    // hidden form failed or missing — try JSONP fallback
+    submitViaJSONP(payload, function(err, data){
+      if (err) return callback(err);
+      callback(null, {status: data && data.status ? data.status : 'unknown', method: 'jsonp', raw: data});
+    });
+  });
 }
 
 /* Form submit handler */
@@ -76,21 +142,23 @@ async function handleSubmit(e){
   localStorage.setItem('lastQuickOrderAt', Date.now());
 
   try {
-    submitViaJSONP(payload, function(err, data){
+    submitOrder(payload, function(err, result){
       if (err) {
-        console.error('JSONP submit error', err);
+        console.error('Order submit error', err);
         alert('Could not place order now. Try again later.');
         if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; }
         return;
       }
-      if (data && data.status === 'ok') {
+
+      // success handling: treat status 'ok' as success
+      if (result && (result.status === 'ok' || result.status === 'OK')) {
         const f = form(); if(f) f.hidden = true;
         const s = successBox(); if(s) s.hidden = false;
         setTimeout(()=> { if (submitBtn) { submitBtn.disabled=false; submitBtn.textContent='Place Order'; } }, 800);
         setTimeout(closeQuickOrder, 1400);
-        console.log('Order successful (JSONP)');
+        console.log('Order successful via', result.method || 'unknown', result);
       } else {
-        console.error('Server rejected JSONP response', data);
+        console.error('Server rejected order', result);
         alert('Server returned error. Try again later.');
         if(submitBtn){ submitBtn.disabled=false; submitBtn.textContent='Place Order'; }
       }
